@@ -19,34 +19,73 @@ class Dummy():
     
     # If you would like to add tools to your agents, you can learn more about it here:
     # https://docs.crewai.com/concepts/agents#agent-tools
-    @agent
-    def researcher(self) -> Agent:
-        return Agent(
-            config=self.agents_config['researcher'], # type: ignore[index]
-            verbose=True
-        )
+    # @agent
+    # def researcher(self) -> Agent:
+    #     return Agent(
+    #         config=self.agents_config['researcher'], # type: ignore[index]
+    #         verbose=True
+    #     )
+
+    # @agent
+    # def reporting_analyst(self) -> Agent:
+    #     return Agent(
+    #         config=self.agents_config['reporting_analyst'], # type: ignore[index]
+    #         verbose=True
+    #     )
+
+    # # To learn more about structured task outputs,
+    # # task dependencies, and task callbacks, check out the documentation:
+    # # https://docs.crewai.com/concepts/tasks#overview-of-a-task
+    # @task
+    # def research_task(self) -> Task:
+    #     return Task(
+    #         config=self.tasks_config['research_task'], # type: ignore[index]
+    #     )
+
+    # @task
+    # def reporting_task(self) -> Task:
+    #     return Task(
+    #         config=self.tasks_config['reporting_task'], # type: ignore[index]
+    #         output_file='report.md'
+    #     )
 
     @agent
-    def reporting_analyst(self) -> Agent:
+    def analytical_debater(self) -> Agent:
         return Agent(
-            config=self.agents_config['reporting_analyst'], # type: ignore[index]
-            verbose=True
+            config=self.agents_config['analytical_debater'], # type: ignore[index]
+            verbose=False
+        )
+    
+    @agent
+    def passionate_debater(self) -> Agent:
+        return Agent(
+            config=self.agents_config['passionate_debater'], # type: ignore[index]
+            verbose=False
         )
 
-    # To learn more about structured task outputs,
-    # task dependencies, and task callbacks, check out the documentation:
-    # https://docs.crewai.com/concepts/tasks#overview-of-a-task
+    @agent
+    def debate_judge(self) -> Agent:
+        return Agent(
+            config=self.agents_config['debate_judge'], # type: ignore[index]
+            verbose=False
+        )
+    
     @task
-    def research_task(self) -> Task:
+    def analytical_debate_task(self) -> Task:
         return Task(
-            config=self.tasks_config['research_task'], # type: ignore[index]
+            config=self.tasks_config['analytical_debate_task'], # type: ignore[index]
         )
 
     @task
-    def reporting_task(self) -> Task:
+    def passionate_debate_task(self) -> Task:
         return Task(
-            config=self.tasks_config['reporting_task'], # type: ignore[index]
-            output_file='report.md'
+            config=self.tasks_config['passionate_debate_task'], # type: ignore[index]
+        )
+    
+    @task
+    def debate_judge_task(self) -> Task:
+        return Task(
+            config=self.tasks_config['debate_judge_task'], # type: ignore[index]
         )
 
     @crew
@@ -55,6 +94,14 @@ class Dummy():
         # To learn how to add knowledge sources to your crew, check out the documentation:
         # https://docs.crewai.com/concepts/knowledge#what-is-knowledge
 
+        # return Crew(
+        #     agents=self.agents, # Automatically created by the @agent decorator
+        #     tasks=self.tasks, # Automatically created by the @task decorator
+        #     process=Process.sequential,
+        #     verbose=True,
+        #     # process=Process.hierarchical, # In case you wanna use that instead https://docs.crewai.com/how-to/Hierarchical/
+        # )
+        print(self.agents)
         return Crew(
             agents=self.agents, # Automatically created by the @agent decorator
             tasks=self.tasks, # Automatically created by the @task decorator

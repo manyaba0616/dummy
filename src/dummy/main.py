@@ -18,12 +18,13 @@ def run():
     Run the crew.
     """
     inputs = {
-        'topic': 'AI LLMs',
-        'current_year': str(datetime.now().year)
+        'topic': 'Favorite animal',
+        'current_year': str(datetime.now().year),
+        'num_rounds': '1'
     }
 
     try:
-        Dummy().crew().kickoff(inputs=inputs)
+        result = Dummy().crew().kickoff(inputs=inputs)
     except Exception as e:
         raise Exception(f"An error occurred while running the crew: {e}")
 
